@@ -22,13 +22,15 @@ public class MainApplication {
     @Bean
     public CommandLineRunner inti(@Autowired Clients clients) {
         return args -> {
-            Client client1 = new Client();
-            client1.setName("jeff");
-            clients.save(client1);
+//            Client client1 = new Client();
+//            client1.setName("jeff");
+//            clients.saveJDBC(client1);
+//
+//            clients.saveJDBC(new Client("charles"));
 
             clients.save(new Client("charles"));
 
-            List<Client> listed = clients.list();
+            List<Client> listed = clients.ListAll();
             listed.forEach(System.out::println);
         };
     }
