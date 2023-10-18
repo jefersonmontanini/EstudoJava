@@ -2,8 +2,8 @@ package MyProject;
 
 import MyProject.domain.entity.Client;
 import MyProject.domain.repository.Clients;
+import MyProject.domain.repository.ClientsJPA;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,18 +20,38 @@ public class MainApplication {
 
 
     @Bean
-    public CommandLineRunner inti(@Autowired Clients clients) {
+    public CommandLineRunner init(
+            @Autowired Clients clients
+//            @Autowired Orders orders
+
+    ) {
         return args -> {
-//            Client client1 = new Client();
-//            client1.setName("jeff");
-//            clients.saveJDBC(client1);
-//
-//            clients.saveJDBC(new Client("charles"));
+            Client jef = clients.save(new Client( "jeferson"));
+            Client charles = clients.save(new Client("charles"));
 
-            clients.save(new Client("charles"));
+            jef.setName("jheff");                       //altera o valor do client
+//            clients.delete(jef);
+            clients.save(jef);                          //salva no BD o valor da variavel alterado
 
-            List<Client> listed = clients.ListAll();
-            listed.forEach(System.out::println);
+//            Order _order = new Order();
+//            _order.setClient(jef);
+//            _order.setDate_order(LocalDate.now());
+//            _order.setTotal(BigDecimal.valueOf(100));
+
+//            Order or = orders.save(new Order(jef, LocalDate.now(), BigDecimal.valueOf(100)));
+
+//            orders.save(_order);
+
+//            orders.findByClient(jef).forEach(System.out::println);
+
+//            Client client = clients.findClientFetchOrder(jef.getId());
+//            System.out.println(client);
+//            System.out.println(client.getOrders());
+
+
+            List<Client> listAll = clients.findAll();
+            listAll.forEach(System.out::println);
+
         };
     }
 

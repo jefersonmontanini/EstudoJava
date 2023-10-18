@@ -1,11 +1,20 @@
 package MyProject.domain.entity;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
+@Entity
+@Table
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+    @Column
     private String name;
+    @Column
     private BigDecimal price;
 
     public Integer getId() {

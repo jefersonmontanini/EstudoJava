@@ -13,6 +13,9 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
+    @Column(name = "cpf", length = 11)
+    private Integer cpf;
+
     public Client() {}
 
     public Client(String name) {
