@@ -40,7 +40,9 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>                                         <!-- uso do banco de dados (banco de dados em memória-->
         </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>

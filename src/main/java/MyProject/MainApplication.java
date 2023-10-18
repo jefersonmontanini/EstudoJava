@@ -18,7 +18,7 @@ public class MainApplication {
     private String configTest;
 
 
-    @GetMapping
+    @GetMapping("/hello")
     public String start() {
         System.out.println(configTest);
         return configTest;

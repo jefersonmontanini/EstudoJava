@@ -1,7 +1,7 @@
-package MyProject.repository;
+package MyProject.domain.repository;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ClientsRepository {
+public class Clients {
 }

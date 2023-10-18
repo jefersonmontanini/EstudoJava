@@ -7,8 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class TestConfig {
 
     @Bean(name = "ConfiTest")
-    public String ConfiTest() {                                             //Bean serve para criar configurações personalizadas----- depe
-         // ndencia STARTER contem as configs defaults
+    public String ConfiTest() {                                             //Bean serve para criar configurações personalizadas----- dependencia STARTER contem as configs defaults
         return "Testando configurações";
     }
 }
