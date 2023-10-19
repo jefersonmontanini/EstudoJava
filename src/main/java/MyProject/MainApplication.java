@@ -2,7 +2,6 @@ package MyProject;
 
 import MyProject.domain.entity.Client;
 import MyProject.domain.repository.Clients;
-import MyProject.domain.repository.ClientsJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;

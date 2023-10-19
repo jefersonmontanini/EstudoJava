@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface Clients extends JpaRepository<Client, Integer> {
+public interface Clients extends JpaRepository<Client, Integer> {                                           //primeiro parametro a classe que ela representa e o segundo o tipo da primary key estabelecido no banco de dados
 
 }

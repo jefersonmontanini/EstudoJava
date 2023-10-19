@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class ClientsJPA {
+public class _ClientsJPA {
 
     //    private static String INSERT = "insert into Client (name) VALUES (?)";
     //    private static String GetByName = "SELECT * FROM Client WHERE name = ? ORDER BY id DESC";                     //uso em JDBC TEMPLATE
