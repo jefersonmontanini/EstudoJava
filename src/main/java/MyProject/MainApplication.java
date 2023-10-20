@@ -29,7 +29,7 @@ public class MainApplication {
 
     ) {
         return args -> {
-            Client jef = clients.save(new Client( "jeferson"));
+//            Client jef = clients.save(new Client( "jeferson"));
 //            Client charles = clients.save(new Client("charles"));
 
 //            jef.setName("jheff");                       //altera o valor do client
@@ -41,7 +41,7 @@ public class MainApplication {
 //            _order.setDate_order(LocalDate.now());              //obter data atual
 //            _order.setTotal(BigDecimal.valueOf(100));
 
-            Order or = orders.save(new Order(jef, LocalDate.now(), BigDecimal.valueOf(100)));
+//            Order or = orders.save(new Order(jef, LocalDate.now(), BigDecimal.valueOf(100)));
 
 //            orders.save(_order);
 
@@ -50,9 +50,9 @@ public class MainApplication {
 //            System.out.println(client);
 //            System.out.println(client.getOrders());
 
-
-            List<Client> listAll = clients.findAll();
-            listAll.forEach(System.out::println);
+//
+//            List<Client> listAll = clients.findAll();
+//            listAll.forEach(System.out::println);
 
         };
     }

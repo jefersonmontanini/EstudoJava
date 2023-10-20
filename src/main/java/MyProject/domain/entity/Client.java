@@ -15,8 +15,8 @@ public class Client {
     @Column(name = "name", length = 100)                                //NAME: nome do campo no banco de dados
     private String name;                                                //variavel q nomeia o campo da tabela na aplicação
 
-    @Column(name = "cpf", length = 11)
-    private Integer cpf;
+    @Column(name = "cpf", length = 11, unique = true)
+    private String cpf;
 
     @OneToMany(mappedBy = "client_id", fetch = FetchType.LAZY)                                  //nome da variavel usada pela APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private Set<Order> orders;
@@ -27,11 +27,11 @@ public class Client {
         this.name = name;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
