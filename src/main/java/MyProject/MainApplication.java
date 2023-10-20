@@ -1,7 +1,9 @@
 package MyProject;
 
 import MyProject.domain.entity.Client;
+import MyProject.domain.entity.Order;
 import MyProject.domain.repository.Clients;
+import MyProject.domain.repository.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication                              //classe que deve ser inicada por spring
@@ -20,30 +24,29 @@ public class MainApplication {
 
     @Bean
     public CommandLineRunner init(
-            @Autowired Clients clients
-//            @Autowired Orders orders
+            @Autowired Clients clients,
+            @Autowired Orders orders
 
     ) {
         return args -> {
             Client jef = clients.save(new Client( "jeferson"));
-            Client charles = clients.save(new Client("charles"));
+//            Client charles = clients.save(new Client("charles"));
 
-            jef.setName("jheff");                       //altera o valor do client
+//            jef.setName("jheff");                       //altera o valor do client
 //            clients.delete(jef);
-            clients.save(jef);                          //salva no BD o valor da variavel alterado
+//            clients.save(jef);                          //salva no BD o valor da variavel alterado
 
 //            Order _order = new Order();
-//            _order.setClient(jef);
-//            _order.setDate_order(LocalDate.now());
+//            _order.setClient_id(jef);
+//            _order.setDate_order(LocalDate.now());              //obter data atual
 //            _order.setTotal(BigDecimal.valueOf(100));
 
-//            Order or = orders.save(new Order(jef, LocalDate.now(), BigDecimal.valueOf(100)));
+            Order or = orders.save(new Order(jef, LocalDate.now(), BigDecimal.valueOf(100)));
 
 //            orders.save(_order);
 
-//            orders.findByClient(jef).forEach(System.out::println);
 
-//            Client client = clients.findClientFetchOrder(jef.getId());
+//            Client client = clients.getClientFetchOrder(jef.getId());
 //            System.out.println(client);
 //            System.out.println(client.getOrders());
 

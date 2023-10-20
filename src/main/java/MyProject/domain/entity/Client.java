@@ -18,13 +18,29 @@ public class Client {
     @Column(name = "cpf", length = 11)
     private Integer cpf;
 
-    @OneToMany(mappedBy = "client_id" )                                  //nome da variavel usada pela APLICAÇÃO
+    @OneToMany(mappedBy = "client_id", fetch = FetchType.LAZY)                                  //nome da variavel usada pela APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private Set<Order> orders;
 
     public Client() {}
 
     public Client(String name) {
         this.name = name;
+    }
+
+    public Integer getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(Integer cpf) {
+        this.cpf = cpf;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     public Client(Integer id, String name) {

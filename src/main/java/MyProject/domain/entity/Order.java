@@ -23,11 +23,20 @@ public class Order {
     @Column
     private LocalDate date_order;
 
-    @Column(length = 20, precision = 2)
+    @Column( precision = 20, scale = 2)                             //precision quantidade de casas, scale quantidade de casas após a virgula
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "order_id" )                                  //nome da variavel usada pela APLICAÇÃO
+    @OneToMany(mappedBy = "order_id", fetch = FetchType.LAZY)                                  //nome da variavel usada pela APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private Set<Item> items;
+
+    public Order() {
+    }
+
+    public Order(Client client_id, LocalDate date_order, BigDecimal total) {
+        this.client_id = client_id;
+        this.date_order = date_order;
+        this.total = total;
+    }
 
     public Integer getId() {
         return id;
@@ -59,5 +68,14 @@ public class Order {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", date_order=" + date_order +
+                ", total=" + total +
+                '}';
     }
 }

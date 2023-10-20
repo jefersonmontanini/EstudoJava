@@ -18,7 +18,7 @@ public class Product {
     @Column
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "product_id")                                      //refere-se a variavel que indica a tabela NA APLICAÇÃO
+    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)                                      //refere-se a variavel que indica a tabela NA APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private Set<Item> items;
 
     public Integer getId() {
