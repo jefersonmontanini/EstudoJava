@@ -1,10 +1,15 @@
 package MyProject.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
+
+@Data                                                                       //Data contêm getters setters e outros
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class Product {
@@ -21,27 +26,4 @@ public class Product {
     @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)                                      //refere-se a variavel que indica a tabela NA APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private Set<Item> items;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

@@ -2,6 +2,7 @@ package MyProject.rest.controller;
 
 import MyProject.domain.entity.Order;
 import MyProject.domain.repository.Orders;
+import MyProject.rest.dto.OrderDTO;
 import MyProject.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
 
 
 @RestController
@@ -26,7 +29,7 @@ public class OrderController {
     @GetMapping("{id}")
     public Order getById(@PathVariable Integer id) {
         return orders.findById(id)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possivel encontrar esse pedido"));
+                .orElseThrow(()-> new ResponseStatusException(NOT_FOUND, "Não foi possivel encontrar esse pedido"));
     }
 
     @GetMapping
@@ -41,9 +44,10 @@ public class OrderController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Order save(Order order) {
-        return orders.save(order);
+    @ResponseStatus(CREATED)
+    public Integer save(@RequestBody OrderDTO dto) {
+        Order order = orderServiceImpl.save(dto);
+        return order.getId();
     }
 
     @PutMapping("{id}")
@@ -54,7 +58,7 @@ public class OrderController {
                     order.setId(order1.getId());
                     orders.save(order);
                     return order1;
-                } ).orElseThrow( ()-> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+                } ).orElseThrow( ()-> new ResponseStatusException(NOT_FOUND) );
     }
 
     @DeleteMapping("{id}")
@@ -63,6 +67,6 @@ public class OrderController {
                 .map(order -> {
                     orders.delete(order);
                     return order;
-                }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possivel encontrar esse pedido"));
+                }).orElseThrow(()-> new ResponseStatusException(NOT_FOUND, "Não foi possivel encontrar esse pedido"));
     }
 }
