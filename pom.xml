@@ -41,6 +41,12 @@
             <artifactId>h2</artifactId>                                         <!-- uso do banco de dados (banco de dados em memória-->
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 
