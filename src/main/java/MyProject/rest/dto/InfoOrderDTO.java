@@ -20,5 +20,6 @@ public class InfoOrderDTO {
     private String cpf;
     private BigDecimal total;
     private String dateOrder;
+    private String status;
     private List<InfoItemsDTO> items;
 }

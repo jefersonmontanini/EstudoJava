@@ -1,5 +1,6 @@
 package MyProject.domain.entity;
 
+import MyProject.domain.enums.StatusOrder;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
@@ -30,6 +31,10 @@ public class Order {
 
     @Column( precision = 20, scale = 2)                                  //precision quantidade de casas, scale quantidade de casas após a virgula
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusOrder status;
 
     @OneToMany(mappedBy = "order_id", fetch = FetchType.LAZY)                                  //nome da variavel usada pela APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private List<Item> items;

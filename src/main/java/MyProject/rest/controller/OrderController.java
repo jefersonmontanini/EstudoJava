@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.Format;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,42 +37,37 @@ public class OrderController {
     private OrderServiceImpl orderServiceImpl;
 
     @GetMapping("{id}")
-    public InfoOrderDTO getOrderById(@PathVariable Integer id) {
+    public InfoOrderDTO getById(@PathVariable Integer id) {
         return orderServiceImpl
-                .getOrder(id)
-                .map(order ->
-                    orderConvert(order)
-                )
-                .orElseThrow( ()-> new ResponseStatusException(NOT_FOUND, "Nao foi encontrado nenhum pedido com este id"));
+                .getAllById(id)
+                .map(order -> convertOrderInDTO(order))
+                .orElseThrow( ()-> new ResponseStatusException(NOT_FOUND) );
     }
 
-    private InfoOrderDTO orderConvert(Order order) {
-        return InfoOrderDTO
-                .builder()
+    private InfoOrderDTO convertOrderInDTO (Order order) {
+        return InfoOrderDTO.builder()
                 .idCode(order.getId())
-                .dateOrder(order.getDate_order().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .cpf(order.getClient_id().getCpf())
                 .name(order.getClient_id().getName())
+                .cpf(order.getClient_id().getCpf())
                 .total(order.getTotal())
-                .items(itemsConvert(order.getItems()))
+                .dateOrder(order.getDate_order().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .status(order.getStatus().name())
+                .items(convertItemsInDTO(order.getItems()))
                 .build();
     }
 
-    private List<InfoItemsDTO> itemsConvert(List<Item> item) {
-        if (CollectionUtils.isEmpty(item)){
+    private List<InfoItemsDTO> convertItemsInDTO(List<Item> items) {
+        if (CollectionUtils.isEmpty(items)) {
             return Collections.emptyList();
-        }                                                   //se o objeto esta vazio ele retorna um array vazio para evitar bugs
-
-        return item.stream()
-                .map(findedItem -> {
-            return InfoItemsDTO.builder()
-                    .product(findedItem.getProduct_id().getName())
-                    .unityPrice(findedItem.getProduct_id().getPrice())
-                    .quantity(findedItem.getQuantity())
-                    .build();
-        }).collect(Collectors.toList());
+        }
+        return items.stream().map(item ->
+            InfoItemsDTO.builder()
+                    .product(item.getProduct_id().getName())
+                    .unityPrice(item.getProduct_id().getPrice())
+                    .quantity(item.getQuantity())
+                    .build()
+        ).collect(Collectors.toList());
     }
-
     @PostMapping
     @ResponseStatus(CREATED)
     public Integer save(@RequestBody OrderDTO dto) {

@@ -9,5 +9,5 @@ public interface OrderService {
 
     Order save(OrderDTO dto);
 
-    Optional<Order> getOrder(Integer id);
+    Optional<Order> getAllById(Integer id);
 }

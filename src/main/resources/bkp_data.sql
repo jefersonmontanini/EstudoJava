@@ -1,6 +1,7 @@
 CREATE TABLE Client (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100)
+    name VARCHAR(100),
+    cpf VARCHAR(11)
 );
 
 CREATE TABLE Product (
@@ -13,6 +14,7 @@ CREATE TABLE `Order` (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     client_id INTEGER REFERENCES Client (id),
     date_order TIMESTAMP,
+    status VARCHAR(20),
     total NUMERIC(20,2)
 );
 

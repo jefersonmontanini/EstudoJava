@@ -4,6 +4,7 @@ import MyProject.domain.entity.Client;
 import MyProject.domain.entity.Item;
 import MyProject.domain.entity.Order;
 import MyProject.domain.entity.Product;
+import MyProject.domain.enums.StatusOrder;
 import MyProject.domain.repository.Clients;
 import MyProject.domain.repository.Items;
 import MyProject.domain.repository.Orders;
@@ -52,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
         order.setTotal(dto.getTotal());
         order.setDate_order(LocalDate.now());
         order.setClient_id(client);
+        order.setStatus(StatusOrder.FINISHED);
 
         List<Item> item = convertItems(order, dto.getItems());
         orders.save(order);
@@ -83,9 +85,9 @@ public class OrderServiceImpl implements OrderService {
                 }).collect(Collectors.toList());
     }
 
-
     @Override
-    public Optional<Order> getOrder(Integer id) {
-        return orders.findByIdFetch(id);
+    public Optional<Order> getAllById(Integer id) {
+        orders.findByIdFetchItems(id);
+        return orders.findByIdFetchItems(id);
     }
 }
