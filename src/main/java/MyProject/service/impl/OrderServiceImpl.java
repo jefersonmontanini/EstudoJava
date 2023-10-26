@@ -61,6 +61,7 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+
     private List<Item> convertItems(Order order, List<ItemDTO> items) {
         if (items.isEmpty()) {
             throw new BusinessRulesException("Não é possivel realizar pedido sem items.");
@@ -80,5 +81,11 @@ public class OrderServiceImpl implements OrderService {
                     item.setProduct_id(product);
                     return item;
                 }).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public Optional<Order> getOrder(Integer id) {
+        return orders.findByIdFetch(id);
     }
 }
