@@ -8,6 +8,7 @@ import MyProject.domain.repository.Clients;
 import MyProject.domain.repository.Items;
 import MyProject.domain.repository.Orders;
 import MyProject.domain.repository.Products;
+import MyProject.exception.BusinessRulesException;
 import MyProject.rest.dto.ItemDTO;
 import MyProject.rest.dto.OrderDTO;
 import MyProject.service.OrderService;
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
         Integer idClient = dto.getClient();                                         //Pega o ID do cliente
         Client client = clients
                 .findById(idClient)                                                 //busca o cliente pelo ID
-                .orElseThrow(() -> new RuntimeException("não foi possivel encontrar esse clinte"));
+                .orElseThrow(() -> new BusinessRulesException("não foi possivel encontrar esse clinte"));
 
         Order order = new Order();
         order.setTotal(dto.getTotal());
@@ -62,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
 
     private List<Item> convertItems(Order order, List<ItemDTO> items) {
         if (items.isEmpty()) {
-            throw new RuntimeException("Não é possivel realizar pedido sem items.");
+            throw new BusinessRulesException("Não é possivel realizar pedido sem items.");
         }
 
         return items
@@ -71,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
                     Integer idProduct = itemDTO.getProduct();
                     Product product = products
                             .findById(idProduct)
-                            .orElseThrow(() -> new RuntimeException("Nã foi possivel encontrar esse produto:" +idProduct));
+                            .orElseThrow(() -> new BusinessRulesException("Nã foi possivel encontrar esse produto:" +idProduct));
 
                     Item item = new Item();
                     item.setQuantity(itemDTO.getQuantity());
