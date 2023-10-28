@@ -4,14 +4,16 @@ import MyProject.domain.entity.Client;
 import MyProject.domain.entity.Item;
 import MyProject.domain.entity.Order;
 import MyProject.domain.entity.Product;
-import MyProject.domain.enums.StatusOrder;
+import MyProject.domain.enums.StateOrder;
 import MyProject.domain.repository.Clients;
 import MyProject.domain.repository.Items;
 import MyProject.domain.repository.Orders;
 import MyProject.domain.repository.Products;
 import MyProject.exception.BusinessRulesException;
+import MyProject.exception.OrderNotFoundException;
 import MyProject.rest.dto.ItemDTO;
 import MyProject.rest.dto.OrderDTO;
+import MyProject.rest.dto.UpdateStateDTO;
 import MyProject.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         order.setTotal(dto.getTotal());
         order.setDate_order(LocalDate.now());
         order.setClient_id(client);
-        order.setStatus(StatusOrder.FINISHED);
+        order.setStatus(StateOrder.FINISHED);
 
         List<Item> item = convertItems(order, dto.getItems());
         orders.save(order);
@@ -89,5 +91,15 @@ public class OrderServiceImpl implements OrderService {
     public Optional<Order> getAllById(Integer id) {
         orders.findByIdFetchItems(id);
         return orders.findByIdFetchItems(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateState(Integer id, StateOrder status) {
+        orders.findById(id)
+                .map(order -> {
+                    order.setStatus(status);
+                    return orders.save(order);
+                }).orElseThrow( ()-> new OrderNotFoundException() );
     }
 }

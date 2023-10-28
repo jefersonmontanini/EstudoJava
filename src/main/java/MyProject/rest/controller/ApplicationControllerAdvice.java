@@ -1,6 +1,7 @@
 package MyProject.rest.controller;
 
 import MyProject.exception.BusinessRulesException;
+import MyProject.exception.OrderNotFoundException;
 import MyProject.rest.ApiErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,5 +17,11 @@ public class ApplicationControllerAdvice {
     public ApiErrors handleRulesBusinessException(BusinessRulesException exception) {
         String errorMessage = exception.getMessage();
         return new ApiErrors(errorMessage);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleOrderNotFoundException(OrderNotFoundException exception) {
+        return new ApiErrors(exception.getMessage());
     }
 }

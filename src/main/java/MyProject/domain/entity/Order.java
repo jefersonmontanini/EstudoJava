@@ -1,14 +1,12 @@
 package MyProject.domain.entity;
 
-import MyProject.domain.enums.StatusOrder;
+import MyProject.domain.enums.StateOrder;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data                                                                       //Data contêm getters setters e outros
 @AllArgsConstructor
@@ -34,7 +32,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private StatusOrder status;
+    private StateOrder status;
 
     @OneToMany(mappedBy = "order_id", fetch = FetchType.LAZY)                                  //nome da variavel usada pela APLICAÇÃO || FETCH LAZY faz com q as buscas de product n tragam Item
     private List<Item> items;

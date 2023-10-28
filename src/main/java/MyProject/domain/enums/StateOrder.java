@@ -1,6 +1,6 @@
 package MyProject.domain.enums;
 
-public enum StatusOrder {
+public enum StateOrder {
 
     FINISHED,
     CANCELED;

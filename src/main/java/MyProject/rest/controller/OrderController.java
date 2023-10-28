@@ -2,11 +2,13 @@ package MyProject.rest.controller;
 
 import MyProject.domain.entity.Item;
 import MyProject.domain.entity.Order;
+import MyProject.domain.enums.StateOrder;
 import MyProject.domain.repository.Orders;
 import MyProject.exception.BusinessRulesException;
 import MyProject.rest.dto.InfoItemsDTO;
 import MyProject.rest.dto.InfoOrderDTO;
 import MyProject.rest.dto.OrderDTO;
+import MyProject.rest.dto.UpdateStateDTO;
 import MyProject.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -73,5 +75,17 @@ public class OrderController {
     public Integer save(@RequestBody OrderDTO dto) {
         Order order = orderServiceImpl.save(dto);
         return order.getId();
+    }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id,
+                             @RequestBody UpdateStateDTO dto) {
+
+
+
+        String state = dto.getNewState();
+        orderServiceImpl.updateState(id, StateOrder.valueOf(state));                                    //pega o valor da variavel de cima e valida se existe enum com o mesmo valor
+
     }
 }
