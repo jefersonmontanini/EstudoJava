@@ -1,5 +1,6 @@
 package MyProject.rest.dto;
 
+import MyProject.validation.NotEmptyList;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,12 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO {
 
-    @NotNull(message = "Informe o cliente")
+    @NotNull(message = "{field.idClient.required}")
     private Integer client;
 
-    @NotNull(message = "Campo total é obrigatorio")
+    @NotNull(message = "{field.totalOrder.required}")
     private BigDecimal total;
 
-
+    @NotEmptyList(message = "{field.itemsOrder.required}")
     private List<ItemDTO> items;
 }

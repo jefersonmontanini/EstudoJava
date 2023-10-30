@@ -22,7 +22,7 @@ public class Order {
     private Integer id;
 
     @ManyToOne
-    @NotEmpty(message = "é obrigatorio indicar um cliente")
+    @NotEmpty(message = "{field.idClient.required}")
     @JoinColumn(name = "client_id")                                     //NAME: nome do campo no banco de dados
     private Client client_id;                                           //variavel q nomeia o campo da tabela na aplicação
 

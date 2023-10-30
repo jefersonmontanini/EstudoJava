@@ -19,12 +19,12 @@ public class Client {
     @Column(name = "id")                                                //assim como anotation TABLE pode nomear a coluna, UNIQUE entre outros
     private Integer id;
 
-    @NotEmpty(message = "Campo nome deve ser obrigatório")
+    @NotEmpty(message = "{field.name.required}")
     @Column(name = "name", length = 100)                                //NAME: nome do campo no banco de dados
     private String name;                                                //variavel q nomeia o campo da tabela na aplicação
 
-    @NotEmpty(message = "Campo cpf deve ser obrigatório")
-    @CPF(message = "Informe um cpf valido")
+    @NotEmpty(message = "{field.cpf.required}")
+    @CPF(message = "{field.cpf.invalid}")
     @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 

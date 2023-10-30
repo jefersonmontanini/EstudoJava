@@ -21,11 +21,11 @@ public class Product {
     @Column(name = "id")                                                     //NAME: nome do campo no banco de dados
     private Integer id;
 
-    @NotEmpty(message = "O campo name é obrigatorio")
+    @NotEmpty(message = "{field.name.required}")
     @Column
     private String name;
 
-    @NotNull(message = "O campo price é obrigatorio")
+    @NotNull(message = "{field.price.required}")
     @Column
     private BigDecimal price;
 
