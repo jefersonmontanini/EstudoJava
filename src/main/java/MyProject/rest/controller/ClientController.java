@@ -2,6 +2,7 @@ package MyProject.rest.controller;
 
 import MyProject.domain.entity.Client;
 import MyProject.domain.repository.Clients;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -40,13 +41,13 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client) {
+    public Client save(@RequestBody @Valid Client client) {
         return clients.save(client);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void update(@PathVariable Integer id,
+    public void update( @Valid @PathVariable Integer id,
                        @RequestBody Client client) {
          clients
                 .findById(id)

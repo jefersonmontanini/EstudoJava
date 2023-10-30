@@ -1,7 +1,9 @@
 package MyProject.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.Set;
 
@@ -16,9 +18,13 @@ public class Client {
     @GeneratedValue(strategy =  GenerationType.AUTO)                    // representa o auto-incremento
     @Column(name = "id")                                                //assim como anotation TABLE pode nomear a coluna, UNIQUE entre outros
     private Integer id;
+
+    @NotEmpty(message = "Campo nome deve ser obrigatório")
     @Column(name = "name", length = 100)                                //NAME: nome do campo no banco de dados
     private String name;                                                //variavel q nomeia o campo da tabela na aplicação
 
+    @NotEmpty(message = "Campo cpf deve ser obrigatório")
+    @CPF(message = "Informe um cpf valido")
     @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 

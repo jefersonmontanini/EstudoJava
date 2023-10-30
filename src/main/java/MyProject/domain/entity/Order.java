@@ -2,6 +2,7 @@ package MyProject.domain.entity;
 
 import MyProject.domain.enums.StateOrder;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class Order {
     private Integer id;
 
     @ManyToOne
+    @NotEmpty(message = "é obrigatorio indicar um cliente")
     @JoinColumn(name = "client_id")                                     //NAME: nome do campo no banco de dados
     private Client client_id;                                           //variavel q nomeia o campo da tabela na aplicação
 

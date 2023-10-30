@@ -2,6 +2,7 @@ package MyProject.rest.controller;
 
 import MyProject.domain.entity.Product;
 import MyProject.domain.repository.Products;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -41,13 +42,13 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Product save(@RequestBody Product product) {
+    public Product save(@RequestBody @Valid Product product) {
         return products.save(product);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(NO_CONTENT)
-    public void update(@PathVariable Integer id,
+    public void update( @Valid @PathVariable Integer id,
                        @RequestBody Product product) {
         products.findById(id)
                 .map( product1 -> {

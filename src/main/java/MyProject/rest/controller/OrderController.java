@@ -10,6 +10,7 @@ import MyProject.rest.dto.InfoOrderDTO;
 import MyProject.rest.dto.OrderDTO;
 import MyProject.rest.dto.UpdateStateDTO;
 import MyProject.service.impl.OrderServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -72,7 +73,7 @@ public class OrderController {
     }
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer save(@RequestBody OrderDTO dto) {
+    public Integer save(@Valid @RequestBody OrderDTO dto) {
         Order order = orderServiceImpl.save(dto);
         return order.getId();
     }
