@@ -21,7 +21,7 @@ public class internacionalizationConfig {
     }
 
     @Bean
-    public LocalValidatorFactoryBean ValidatorFactoryBean() {                                                  //Faz a troca dos textos CHAVE/VALOR
+    public LocalValidatorFactoryBean ValidatorFactoryBean() {                                                       //Faz a troca dos textos CHAVE/VALOR
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
